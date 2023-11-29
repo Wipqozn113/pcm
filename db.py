@@ -33,6 +33,8 @@ class DatabaseHandler:
         return players
     
     def PopulatePlayers(self, players):
+        # Not going to bother with IDs of any kind. Table will always be small, 
+        # so just wipe it and reinsert everything each time.
         self.cursor.execute("DELETE FROM players")
         self.connection.commit()
         for player in players:
