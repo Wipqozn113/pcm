@@ -23,14 +23,21 @@ class DatabaseHandler:
     def __CreateTables__(self):
         self.__CreateTable__("players", ("name", "sheet"))
 
+    ###################
+    # Player Handlers #
+    ###################
     def GetPlayers(self):
         players = []
         for row in self.cursor.execute("SELECT name, sheet FROM players"):
             players.append(Player(row[0], row[1]))
         return players
     
+    def PopulatePlayers(self, players):
+        self.cursor.execute("DELETE FROM players")
+        self.connection.commit()
+        for player in players:
+            self.CreatePlayer(player.name, player.sheet)
+
     def CreatePlayer(self, name, sheet):
-        sql = f"INSERT INTO players VALUES (\"{name}\", \"{sheet}\")"
-        print(sql)
-        self.cursor.execute(sql)
+        self.cursor.execute(f"INSERT INTO players VALUES (\"{name}\", \"{sheet}\")")
         self.connection.commit()

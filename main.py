@@ -26,8 +26,11 @@ def create_entry(add_button, save_button, number_of_inputs=1, name="", sheet="")
     save_button.grid(row=j+1, column=1)
 
 def save_entries():
+    players = []
     for name, sheet in ref:
-        dbhandler.CreatePlayer(name.get(), sheet.get())
+        if name.get() and sheet.get():
+            players.append(db.Player(name.get(), sheet.get()))        
+    dbhandler.PopulatePlayers(players)
 
 save_button = tk.Button(my_w,text='Save', bg='lightgreen', command=lambda: save_entries(), font=18)
 add=tk.Button(my_w,text='Add', bg='lightgreen', command=lambda: create_entry(add, save_button, 1), font=18)
