@@ -1,6 +1,56 @@
-<p>Loot</p>
+<h1>Loot for Level {{ level }}</h1>
+
+<h2>Gold</h2>
+{{ gold.rewarded }} / {{ gold.total }}
+
+<h2>Permament</h2>
 <ul>
-{% for loot in loot_list %}
-    <li>{{ loot.name }}</li>
+{% for loot in perms %}
+    {% if loot.awarded %}
+        <s>
+    {% endif %}
+
+    <li>
+
+    {% if loot.aon_link is None %}
+        {{ loot.name }}
+    {% else %}
+        <a href="{{ loot.aon_link }}">{{ loot.name }}</a>
+    {% endif %}
+        
+    ({{ loot.item_level }}) 
+    <a href="/admin/pathfinder/loot/{{loot.id}}/change/">Edit</a> 
+    
+
+    </li>
+
+    {% if loot.awarded %}
+        </s>
+    {% endif %}
+{% endfor %}
+</ul>
+
+<h2>Consumable</h2>
+<ul>
+{% for loot in consumables %}
+    {% if loot.awarded %}
+        <s>
+    {% endif %}
+
+    <li>
+
+    {% if loot.aon_link is None %}
+        {{ loot.name }}
+    {% else %}
+        <a href="{{ loot.aon_link }}">{{ loot.name }}</a>
+    {% endif %}
+
+    ({{ loot.item_level }}) 
+    <a href="/admin/pathfinder/loot/{{loot.id}}/change/">Edit</a> 
+    </li>
+
+    {% if loot.awarded %}
+    </s>
+    {% endif %}
 {% endfor %}
 </ul>

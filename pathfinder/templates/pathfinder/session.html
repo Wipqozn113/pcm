@@ -1,0 +1,19 @@
+<title>Session {{ model.date }}</title>
+<h1>Session {{ model.date }}</h1>
+
+<h2>Overview</h2>
+<p>{{ model.overview }}</p>
+
+<h2>Notes</h2>
+<p>{{ model.notes }}</p>
+
+<h2>Encounters</h2>
+<ul>
+{% for encounter in model.encounters %}
+<li>
+    <a href="{% url 'encounter' encounter.id %}">
+        {{ encounter.name }}
+    </a>
+</li>
+{% endfor %}
+</ul>
