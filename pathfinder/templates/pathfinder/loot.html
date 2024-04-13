@@ -1,56 +1,24 @@
+{% extends "pathfinder/base.html" %}
+
+{% block title %}
 <h1>Loot for Level {{ level }}</h1>
+<title>Loot for Level {{ level }}</title>
+{% endblock %}
+
+{% block subnav %}
+<div id="subnav">
+    {% with prev=level|add:"-1" next=level|add:1 %}
+    <a href="{% url 'loot' prev %}">Prev Level</a> | <a href="{% url 'loot' next %}">Next Level</a>
+    {% endwith %}
+</div>
+{% endblock %}
+
+{% block content %}
 
 <h2>Gold</h2>
 {{ gold.rewarded }} / {{ gold.total }}
 
-<h2>Permament</h2>
-<ul>
-{% for loot in perms %}
-    {% if loot.awarded %}
-        <s>
-    {% endif %}
+{% include "pathfinder/partials/lootlist.html" with list_title="Permament" loot_list=perms %}
+{% include "pathfinder/partials/lootlist.html" with list_title="Consumable" loot_list=consumables %}
 
-    <li>
-
-    {% if loot.aon_link is None %}
-        {{ loot.name }}
-    {% else %}
-        <a href="{{ loot.aon_link }}">{{ loot.name }}</a>
-    {% endif %}
-        
-    ({{ loot.item_level }}) 
-    <a href="/admin/pathfinder/loot/{{loot.id}}/change/">Edit</a> 
-    
-
-    </li>
-
-    {% if loot.awarded %}
-        </s>
-    {% endif %}
-{% endfor %}
-</ul>
-
-<h2>Consumable</h2>
-<ul>
-{% for loot in consumables %}
-    {% if loot.awarded %}
-        <s>
-    {% endif %}
-
-    <li>
-
-    {% if loot.aon_link is None %}
-        {{ loot.name }}
-    {% else %}
-        <a href="{{ loot.aon_link }}">{{ loot.name }}</a>
-    {% endif %}
-
-    ({{ loot.item_level }}) 
-    <a href="/admin/pathfinder/loot/{{loot.id}}/change/">Edit</a> 
-    </li>
-
-    {% if loot.awarded %}
-    </s>
-    {% endif %}
-{% endfor %}
-</ul>
+{% endblock %}

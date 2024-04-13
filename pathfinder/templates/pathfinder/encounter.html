@@ -1,5 +1,11 @@
+{% extends "pathfinder/base.html" %}
+
+{% block title %}
 <title>Encounter ({{ model.Difficulty }}) {{ model.name }}</title>
 <h1>Encounter ({{ model.Difficulty }}) {{ model.name }}</h1>
+{% endblock %}
+
+{% block content %}
 {% if model.location %}
 <h2>{{ model.location }}</h2>
 {% endif %}
@@ -13,3 +19,4 @@
 </li>
 {% endfor %}
 </ul>
+{% endblock %}

@@ -1,0 +1,26 @@
+<h2>{{ list_title }}</h2>
+<ul>
+{% for loot in loot_list %}
+    {% if loot.awarded %}
+        <s>
+    {% endif %}
+
+    <li>
+
+    {% if loot.aon_link is None %}
+        {{ loot.name }}
+    {% else %}
+        <a href="{{ loot.aon_link }}">{{ loot.name }}</a>
+    {% endif %}
+        
+    ({{ loot.item_level }}) 
+    <a href="/admin/pathfinder/loot/{{loot.id}}/change/">Edit</a> 
+    
+
+    </li>
+
+    {% if loot.awarded %}
+        </s>
+    {% endif %}
+{% endfor %}
+</ul>

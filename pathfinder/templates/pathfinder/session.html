@@ -1,6 +1,11 @@
+{% extends "pathfinder/base.html" %}
+
+{% block title %}
 <title>Session {{ model.date }}</title>
 <h1>Session {{ model.date }}</h1>
+{% endblock %}
 
+{% block content %}
 <h2>Overview</h2>
 <p>{{ model.overview }}</p>
 
@@ -17,3 +22,4 @@
 </li>
 {% endfor %}
 </ul>
+{% endblock %}
